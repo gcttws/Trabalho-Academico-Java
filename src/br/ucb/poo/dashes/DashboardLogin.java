@@ -92,7 +92,7 @@ public class DashboardLogin extends Dashboard {
 		String senha, nome, dataDeNascimento, telefone, email;
 		
 		while (!usuarioValido) {
-			if (usuario == "Voltar") {
+			if (usuario.equals("Voltar")){
 				return 0;
 			} else {
 				boolean usuarioExiste = userDao.verificaExistenciaCliente(usuario);
@@ -144,7 +144,7 @@ public class DashboardLogin extends Dashboard {
 		
 		
 		while (!usuarioValido) {		
-		if (usuario == "Voltar") {
+		if (usuario.equals("Voltar")){
 			return 0;
 		} else {
 				

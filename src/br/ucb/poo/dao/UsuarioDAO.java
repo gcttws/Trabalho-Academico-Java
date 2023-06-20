@@ -39,13 +39,14 @@ public class UsuarioDAO {
 	}
     
     public boolean verificaSenhaCliente(String usuario, String senha) {
-    	String sql = "SELECT senha FROM usuarios WHERE username = ?";
+    	String sql = "SELECT senha FROM usuarios WHERE username = '?'";
     	
     	try {
-    		PreparedStatement pstmt =connection.prepareStatement(sql);
+    		PreparedStatement pstmt = connection.prepareStatement(sql);
     		pstmt.setString(1, usuario);
     		ResultSet rs = pstmt.executeQuery();
-
+    		
+    		System.out.println(rs);
     		String senhaGravadaBanco = rs.getString(1);
     		rs.close();
     		pstmt.close();
