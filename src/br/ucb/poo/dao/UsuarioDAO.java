@@ -39,18 +39,24 @@ public class UsuarioDAO {
 	}
     
     public boolean verificaSenhaCliente(String usuario, String senha) {
-    	String sql = "SELECT senha FROM usuarios WHERE username = '?'";
+    	String sql = "SELECT senha FROM usuarios WHERE username = ?";
     	
     	try {
     		PreparedStatement pstmt = connection.prepareStatement(sql);
     		pstmt.setString(1, usuario);
     		ResultSet rs = pstmt.executeQuery();
     		
-    		System.out.println(rs);
+    		if(!rs.next()) {
+    			System.out.println("Não encontrou nenhum cliente com a senha especificada.");
+    			return false;
+    		}
+    		
+
     		String senhaGravadaBanco = rs.getString(1);
+    		
     		rs.close();
     		pstmt.close();
-    		return senha == senhaGravadaBanco ? true : false;
+    		return senha.equals(senhaGravadaBanco) ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
     		return false;
@@ -70,6 +76,9 @@ public class UsuarioDAO {
 			pstmt.setString(5, cliente.getTelefone());
 			pstmt.setString(6,  cliente.getEmail());
 			pstmt.setInt(7, 2);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,6 +110,8 @@ public class UsuarioDAO {
 			Date dataNascimento = java.sql.Date.valueOf(clienteAtualizacao.getDataNascimento());
 			pstmt.setDate(4, dataNascimento);
 			pstmt.setString(5, clienteAtualizacao.getTelefone());
+			pstmt.executeUpdate();
+			pstmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

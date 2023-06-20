@@ -122,6 +122,7 @@ public class DashboardLogin extends Dashboard {
 				
 				
 				userDao.salvaClienteBD(cliente);
+				System.out.println("\nUsuário criado com sucesso!");
 				usuarioValido = true;
 		}
 		
@@ -160,13 +161,14 @@ public class DashboardLogin extends Dashboard {
 				
 				boolean senhaPareada = userDao.verificaSenhaCliente(usuario,  senha);
 				if (senhaPareada) {
+					System.out.println("Usuário logado com sucesso!");
 					return 3;
 				} else {
 					System.out.println("Senha inválida.");
 					continue;
 				}
 			}
-			}
+		}
 		
 		return 0;
 	}
