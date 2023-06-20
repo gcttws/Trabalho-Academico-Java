@@ -3,9 +3,9 @@ package br.ucb.poo.bean;
 import java.util.List;
 
 public abstract class Usuario {
-	private String nome;
-	private String username;
-	private String senha;
+	protected String nome;
+	protected String username;
+	protected String senha;
 	private List<Role> roles;
 	protected int role;
 

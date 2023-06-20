@@ -15,6 +15,29 @@ public class Cliente extends Usuario {
 		this.dataNascimento = dataNascimento;	
 	}
 	
+	public Cliente(String nome, String username, String senha, String telefone, String email, String dataNascimento) {
+		this.nome = nome;
+		this.username = username;
+		this.senha = senha;
+		this.telefone = telefone;
+		this.email = email;
+		
+		// Role de Cliente sempre igual a 2
+		this.role = 2;
+		
+		// Inicializa Data de Nascimento
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    String date = dataNascimento;
+	    //convert String to LocalDate
+	    LocalDate localDate = LocalDate.parse(dataNascimento, formatter);
+	    this.dataNascimento = localDate;
+	
+		
+		
+
+		
+	}
+	
 	//getters and setters
 	public String getTelefone() {
 		return telefone;

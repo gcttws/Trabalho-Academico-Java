@@ -9,7 +9,6 @@ public class ConexaoFactory {
 	public Connection conectar() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("CONECTOU!!");
 		}catch(ClassNotFoundException e1){
 			e1.printStackTrace();
 		}

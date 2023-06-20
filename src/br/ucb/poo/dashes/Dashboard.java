@@ -9,7 +9,7 @@ public class Dashboard {
 		String stringApresentacao =  "\n=========================================================================="
 								   + "\n=== Seja bem-vindo à Alpha Motors!                                     ==="
 								   + "\n=== Primeiro, faça seu login ou cadastre-se!                           ==="
-								   + "\n==========================================================================";
+								   + "\n==========================================================================\n";
 		return stringApresentacao;
 	}
 	

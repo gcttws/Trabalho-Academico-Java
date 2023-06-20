@@ -11,21 +11,20 @@ public class Executora {
 	static VeiculoDAO dao = new VeiculoDAO();
 	
 	public static void main(String[] args) {
-		System.out.println("--- SISTEMA ALPHAMOTRS ---");
+		System.out.println("--- SISTEMA ALPHAMOTORS ---");
 		int stepAtual = 0;
+		
 		Dashboard dashAtual = new Dashboard();
 		dashAtual.imprimeTelaAtual();
+		dashAtual = new DashboardLogin(stepAtual);
 		
 		
-		dashAtual.dashboardLoginLoop(1);
-		
-		
-		insereVeiculo();
+		//insereVeiculo();
 		//imprimirVeiculos();
 		//removeVeiculo(4);
 		//atualizaVeiculo(3);
 		//atualizaVeiculo(4);
-		imprimirVeiculos();  
+		//imprimirVeiculos();  
 	}
 
 	//FUNCTIONS

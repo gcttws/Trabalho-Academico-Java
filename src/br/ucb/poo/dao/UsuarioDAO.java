@@ -19,8 +19,45 @@ public class UsuarioDAO {
 	ConexaoFactory conexao = new ConexaoFactory();
 	Connection connection = conexao.conectar();
 	
+	public boolean verificaExistenciaCliente(String usuario) {	    
+	
+		String sql = "SELECT COUNT(*) FROM usuarios WHERE username = ?";
+    try {
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setString(1, usuario);
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        rs.close();
+        pstmt.close();
+        return count > 0;
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+	}
+    
+    public boolean verificaSenhaCliente(String usuario, String senha) {
+    	String sql = "SELECT senha FROM usuarios WHERE username = ?";
+    	
+    	try {
+    		PreparedStatement pstmt =connection.prepareStatement(sql);
+    		pstmt.setString(1, usuario);
+    		ResultSet rs = pstmt.executeQuery();
+
+    		String senhaGravadaBanco = rs.getString(1);
+    		rs.close();
+    		pstmt.close();
+    		return senha == senhaGravadaBanco ? true : false;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		return false;
+    	}
+}
+    
 	public void salvaClienteBD(Cliente cliente) {
-		String sql = "INSERT INTO usuarios(nome, username, senha, data_nasc, telefone, email, role) VALUES(?, ?, ?, ?)";
+		String sql = "INSERT INTO usuarios(nome, username, senha, data_nasc, telefone, email, role) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -31,7 +68,7 @@ public class UsuarioDAO {
 			pstmt.setDate(4, dataNascimento);
 			pstmt.setString(5, cliente.getTelefone());
 			pstmt.setString(6,  cliente.getEmail());
-			pstmt.setInt(7, cliente.getRole());
+			pstmt.setInt(7, 2);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
