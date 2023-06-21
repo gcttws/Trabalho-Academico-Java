@@ -8,6 +8,8 @@ public class Veiculo {
 	private String placa;
 	private int ano;
 	private String status;
+	private int dono;
+	
 	/*
 	Veiculo(String marca, String modelo, String placa, int ano, String status){
 		this.marca = marca;
@@ -18,8 +20,15 @@ public class Veiculo {
 		
 	}
 	*/
-	
 	//getters and setters
+	public int getDono() {
+		return dono;
+	}
+	
+	public void setDono(int dono) {
+		this.dono = dono;
+	}
+	
 	public String getStatus() {
 		return status;
 	}

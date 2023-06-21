@@ -1,0 +1,40 @@
+ "\n=========================================================================="			
+			   + "\n=== Escolha uma das opções:                                            ==="
+			   + "\n=== 1) Listar Todos os Veículos à Venda em Sua Carteira                ==="
+			   + "\n=== 2) Inserir Veículo para Venda                                      ==="
+			   + "\n=== 3) Atualizar Informações do Veículo                                ==="
+			   + "\n=== 4) Remover Veículo da Listagem                                     ==="
+			   + "\n=== 5) 0 Sair da Sessão Atual                                            ==="
+			   + "\n=== 0) Sair do Programa                                                ==="
+			   + "\n==========================================================================\n";
+				 return telaDashboardVeiculos;
+	
+
+	
+	while (!listaOpcoesSaida.contains(this.stepAtual)) {
+			switch (this.stepAtual) {
+			case 0:
+				// Sair do Programa
+				this.stepAtual = 0;
+				break;
+			case 4:
+				// Listar Veículos
+				this.stepAtual = dashboardListaVeiculosLoop(this.stepAtual);
+			case 5:
+				// Inserir Veículo p/ Venda
+				this.stepAtual = dashboardInsereVeiculoLoop(this.stepAtual);
+			case 6:
+				// Atualizar Infos do Veículo
+				this.stepAtual = dashboardAtualizaInfosVeiculoLoop(this.stepAtual);
+			case 7:
+				// Remover Veículo da Listagem
+				this.stepAtual = dashboardRemoveVeiculoLoop(this.stepAtual)
+				this.stepAtual = 7;
+			case 8:
+				// Sair da Sessão Atual
+				this.stepAtual = 8;
+			case 9:
+				// Realizar Nova Operação
+				this.stepAtual = dashboardVeiculosLoop(this.stepAtual);
+			}
+		}

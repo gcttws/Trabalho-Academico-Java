@@ -28,8 +28,11 @@ CREATE TABLE `usuarios` (
   `username` varchar(50) NOT NULL,
   `senha` varchar(50) NOT NULL,
   `role` varchar(20) NOT NULL,
+  `data_nasc` datetime DEFAULT NULL,
+  `telefone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Gustavo Capistrano','gustavo.capistrano','123456','1');
+INSERT INTO `usuarios` VALUES (1,'Gustavo Capistrano','gustavo.capistrano','123456','1',NULL,NULL,NULL),(3,'Paul Atreides','atreides','123456','2','2164-03-01 00:00:00','6199371820','paul@atreides.ch');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,13 +54,14 @@ DROP TABLE IF EXISTS `veiculos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `veiculos` (
   `id_veiculo` int NOT NULL AUTO_INCREMENT,
-  `marca` varchar(100) DEFAULT NULL,
-  `modelo` varchar(255) DEFAULT NULL,
-  `placa` varchar(8) DEFAULT NULL,
+  `marca` varchar(100) NOT NULL,
+  `modelo` varchar(255) NOT NULL,
+  `placa` varchar(8) NOT NULL,
   `ano` int NOT NULL,
-  `status` varchar(45) DEFAULT NULL,
+  `status` varchar(45) NOT NULL,
+  `id_user` int NOT NULL,
   PRIMARY KEY (`id_veiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +70,7 @@ CREATE TABLE `veiculos` (
 
 LOCK TABLES `veiculos` WRITE;
 /*!40000 ALTER TABLE `veiculos` DISABLE KEYS */;
+INSERT INTO `veiculos` VALUES (1,'BMW','320i','JGH-X8GU',2023,'À VENDA',3),(2,'Volvo','C60','JGH-X8GU',2021,'À VENDA',3);
 /*!40000 ALTER TABLE `veiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-20 19:20:00
+-- Dump completed on 2023-06-21 19:18:53

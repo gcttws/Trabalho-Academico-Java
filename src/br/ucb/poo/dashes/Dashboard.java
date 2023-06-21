@@ -6,15 +6,16 @@ public class Dashboard {
 	protected int stepAtual = 0;
 	
 	public String getPresentationString() {
-		String stringApresentacao =  "\n=========================================================================="
-								   + "\n=== Seja bem-vindo à Alpha Motors!                                     ==="
-								   + "\n=== Primeiro, faça seu login ou cadastre-se!                           ==="
+		String stringApresentacao =  "\n==========================================================================\n"
+								   + "\n=== Seja bem-vindo à Alpha Motors!                                     ===\n"
+								   + "\n=== Primeiro, faça seu login ou cadastre-se!                           ===\n"
 								   + "\n==========================================================================\n";
 		return stringApresentacao;
 	}
 	
 	public void imprimeTelaAtual() {
 		System.out.println(this.getPresentationString());
-	}	
+	}
+
 		
 }

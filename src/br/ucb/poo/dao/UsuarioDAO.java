@@ -37,7 +37,43 @@ public class UsuarioDAO {
         return false;
     }
 	}
-    
+	
+	public String getNomeClienteFromUsername(String username) {	    
+		
+		String sql = "SELECT nome FROM usuarios WHERE username = ?";
+    try {
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setString(1, username);
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        String nome = rs.getString("nome");
+        rs.close();
+        pstmt.close();
+        return nome;
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return "Erro";
+	}
+	}
+	
+	public int getIdClienteFromUsername(String username) {
+		String sql = "SELECT id_user FROM usuarios WHERE username = ?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, username);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int idUsuario = rs.getInt("id_user");
+			rs.close();
+			pstmt.close();
+			return idUsuario;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
     public boolean verificaSenhaCliente(String usuario, String senha) {
     	String sql = "SELECT senha FROM usuarios WHERE username = ?";
     	

@@ -8,44 +8,56 @@ import br.ucb.poo.bean.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.SQLException;
-
 public class DashboardLogin extends Dashboard {
 	private String username;
-	private String senha;
+	
+	// Getters
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	
 	public String getPresentationString() {
-		 String stringApresentacao = "=========================================================================="
-				   					+ "=== Seja bem-vindo à Alpha Motors!                                     ==="
-				   					+ "=== Para realizar seu login ou criar um novo usuário, escolha uma das  ==="
-				   					+ "=== opções especificadas abaixo. Para voltar ao menu anterior, sim-    ==="
-				   					+ "plesmente digite Voltar.                   	 						  ==="
-		 							+ "==========================================================================";
+		 String stringApresentacao = "\n===========================================================================\n"
+				   					+ "\n=== Seja bem-vindo à Alpha Motors!                                     ===\n"
+				   					+ "\n=== Para realizar seu login ou criar um novo usuário, escolha uma das  ===\n"
+				   					+ "\n=== opções especificadas abaixo. Para voltar ao menu anterior, sim-    ===\n"
+				   					+ "\n=== plesmente digite Voltar.                   	 					===\n"
+		 							+ "============================================================================\n";
 			return stringApresentacao;
 	}
 	
 	public DashboardLogin(int step) {
-		int stepAtual = dashboardLoginLoop(step);
+		System.out.println(getPresentationString());
 		
-		while (stepAtual != 3) {
-			switch (stepAtual) {
+		this.stepAtual = dashboardLoginLoop(step);
+		
+		while (this.stepAtual != 3) {
+			switch (this.stepAtual) {
 				case 0:
-					stepAtual = dashboardLoginLoop(stepAtual);
+					this.stepAtual = dashboardLoginLoop(this.stepAtual);
 					break;
 				case 1:
-					stepAtual = dashboardRealizaLoginLoop(stepAtual);
+					this.stepAtual = dashboardRealizaLoginLoop(this.stepAtual);
 					break;
 				case 2:
-					stepAtual = dashboardCriaContaLoop(stepAtual);
+					this.stepAtual = dashboardCriaContaLoop(this.stepAtual);
 					break;
 				case 3:
 					break;
 				default:
-					stepAtual = dashboardLoginLoop(stepAtual);
+					this.stepAtual = dashboardLoginLoop(this.stepAtual);
 			}
 			
-			if (stepAtual == 3) break;
-		}
+			if (this.stepAtual == 3) { 
+				System.out.println("\nAdentrando a tela de dashboard dos veículos..."); 
+				break;
+			}
+			}
+
 	}
 	
 	public String telaCriacaoConta() {
@@ -78,6 +90,31 @@ public class DashboardLogin extends Dashboard {
 		return telaDashboardRealizaLogin;
 }
 
+	public int dashboardLoginLoop(int stepAtual) {
+		System.out.println(telaDashboardLogin());
+		List listaOpcoes = new ArrayList<Integer>();
+		listaOpcoes.add(1);
+		listaOpcoes.add(2);
+				
+		Scanner sc = new Scanner(System.in);
+		int escolha = sc.nextInt();
+		
+		while(!listaOpcoes.contains(escolha)) {
+			System.out.println("Escolha inválida. Por favor, insira um novo valor.");
+			escolha = sc.nextInt();
+		}
+		
+		if(escolha == 1) {
+			this.stepAtual = 1;
+			return this.stepAtual;
+		} else if (escolha == 2) {
+			this.stepAtual = 2;
+			return this.stepAtual;
+		}
+		
+		return 0;
+	}
+	
 	public int dashboardCriaContaLoop(int stepAtual) {
 		boolean usuarioValido = false;
 		
@@ -123,6 +160,7 @@ public class DashboardLogin extends Dashboard {
 				
 				userDao.salvaClienteBD(cliente);
 				System.out.println("\nUsuário criado com sucesso!");
+				this.username = username;
 				usuarioValido = true;
 		}
 		
@@ -162,6 +200,7 @@ public class DashboardLogin extends Dashboard {
 				boolean senhaPareada = userDao.verificaSenhaCliente(usuario,  senha);
 				if (senhaPareada) {
 					System.out.println("Usuário logado com sucesso!");
+					this.username = usuario;
 					return 3;
 				} else {
 					System.out.println("Senha inválida.");
@@ -171,32 +210,5 @@ public class DashboardLogin extends Dashboard {
 		}
 		
 		return 0;
-	}
-		
-	
-	public int dashboardLoginLoop(int stepAtual) {
-		System.out.println(telaDashboardLogin());
-		List listaOpcoes = new ArrayList<Integer>();
-		listaOpcoes.add(1);
-		listaOpcoes.add(2);
-				
-		Scanner sc = new Scanner(System.in);
-		int escolha = sc.nextInt();
-		
-		while(!listaOpcoes.contains(escolha)) {
-			System.out.println("Escolha inválida. Por favor, insira um novo valor.");
-			escolha = sc.nextInt();
-		}
-		
-		if(escolha == 1) {
-			this.stepAtual = 1;
-			return this.stepAtual;
-		} else if (escolha == 2) {
-			this.stepAtual = 2;
-			return this.stepAtual;
-		}
-		
-		return 0;
-	}
-
+	}	
 }
